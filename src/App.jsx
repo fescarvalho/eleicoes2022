@@ -13,12 +13,12 @@ function App() {
   const [eleitoL, setEleitoL] = useState("");
   const [eleitoB, setEleitoB] = useState("");
 
+  useEffect(() => {
+    gateData();
+  }, [contador]);
   function render() {
     gateData();
   }
-  useEffect(() => {
-    gateData();
-  }, []);
 
   setTimeout(() => {
     setContador(contador + 1);
