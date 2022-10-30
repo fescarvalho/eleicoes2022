@@ -22,7 +22,6 @@ function App() {
 
   setTimeout(() => {
     setContador(contador + 1);
-    console.log(contador);
   }, [1000]);
 
   async function gateData() {
