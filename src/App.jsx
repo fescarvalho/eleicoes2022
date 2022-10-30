@@ -13,18 +13,18 @@ function App() {
   const [contador, setContador] = useState(0);
   const [data, setData] = useState("");
   const [hora, setHora] = useState("");
+  const [eleitoL, setEleitoL] = useState("");
+  const [eleitoB, setEleitoB] = useState("");
 
   useEffect(() => {
     gateData();
-    console.log("renderizou use");
   }, [contador]);
 
-  /* 
   setTimeout(() => {
     setContador(contador + 1);
     console.log(contador);
   }, [30000]);
- */
+
   async function gateData() {
     await axios.get(url).then((response) => {
       setLula(response.data.cand[0]);
@@ -32,6 +32,8 @@ function App() {
       setUrnas(response.data.pst);
       setData(response.data.dg);
       setHora(response.data.hg);
+      setEleitoL(response.data.cand[0].e === "s" ? true : false);
+      setEleitoB(response.data.cand[1].e === "s" ? true : false);
     });
   }
 
@@ -49,8 +51,8 @@ function App() {
       </div>
       <div className="contentApp">
         <h1>Resultados Gerais</h1>
-        <Card name={lula.nm} porcentagem={lula.pvap} />
-        <Card name={bolsonaro.nm} porcentagem={bolsonaro.pvap} />
+        <Card name={lula.nm} porcentagem={lula.pvap} eleito={eleitoL} />
+        <Card name={bolsonaro.nm} porcentagem={bolsonaro.pvap} eleito={eleitoB} />
       </div>
     </div>
   );
